@@ -1,0 +1,31 @@
+docker pull ubuntu:22.04
+docker run -it --name http3_ubuntu ubuntu:22.04 bash
+Inside docker: apt-get update
+apt-get install -y --no-install-recommends \
+    build-essential gcc g++ make cmake autoconf automake libtool pkg-config perl \
+    git curl wget ca-certificates python3 python3-pip gettext m4 libpsl-dev libwebsockets-dev \
+exit
+
+Next time, to login to the same docker: docker start -ai http3_ubuntu
+
+vi script.sh
+>>
+chmod +x script.sh
+./script.sh
+
+vi server.py
+>>
+vi client.c
+>>
+
+ls ${HOME}/http3-stack-simple/
+source ${HOME}/http3-stack-simple/setup-env.sh
+
+Run Server in Background:
+python3 server.py --host 0.0.0.0 --port 4433 &
+
+gcc client.c client -lcurl -lpthread
+(Resolve curl.h header path using EXPORT PATH, if conflict)
+
+
+
